@@ -33,12 +33,6 @@ public class s_HouseChildren : MonoBehaviour {
                     hasBrokenHouse = true;
                 }
             }
-            // if something with a high mass hits the house hard enough, break the house
-            else if (other.rigidbody.mass >= 5 && other.relativeVelocity.magnitude > 10f)
-            {
-                GetComponentInParent<s_HouseParent>().BreakHouse();
-                hasBrokenHouse = true;
-            }
         }
     }
 }
