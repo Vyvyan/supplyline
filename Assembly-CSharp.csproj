@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\s_Rock.cs" />
      <Compile Include="Assets\Scripts\s_WanderingAI.cs" />
      <Compile Include="Assets\Scripts\s_Worker.cs" />
+     <Compile Include="Assets\Scripts\s_Yeti.cs" />
      <Compile Include="Assets\Scripts\s_cursorLock.cs" />
      <Compile Include="Assets\TerrainToolkit\TerrainToolkit.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

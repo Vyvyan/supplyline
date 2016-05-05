@@ -25,7 +25,7 @@ public class s_HouseChildren : MonoBehaviour {
         if (!hasBrokenHouse)
         {
             // if we get hit by an axe
-            if (other.collider.gameObject.tag == "Axe")
+            if (other.collider.gameObject.tag == "Axe" || other.collider.gameObject.tag == "Weapon")
             {
                 if (other.relativeVelocity.magnitude > 10f)
                 {
