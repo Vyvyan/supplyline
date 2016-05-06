@@ -57,7 +57,9 @@
      <Compile Include="Assets\Scripts\s_Conveyor.cs" />
      <Compile Include="Assets\Scripts\s_ConveyorBelt.cs" />
      <Compile Include="Assets\Scripts\s_FirePlace.cs" />
+     <Compile Include="Assets\Scripts\s_GameManager.cs" />
      <Compile Include="Assets\Scripts\s_HUD.cs" />
+     <Compile Include="Assets\Scripts\s_HomeBase.cs" />
      <Compile Include="Assets\Scripts\s_HouseChildren.cs" />
      <Compile Include="Assets\Scripts\s_HouseParent.cs" />
      <Compile Include="Assets\Scripts\s_Log.cs" />

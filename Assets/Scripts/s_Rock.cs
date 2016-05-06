@@ -3,7 +3,7 @@ using System.Collections;
 
 public class s_Rock : MonoBehaviour {
 
-    public GameObject rockToSpawn;
+    public GameObject rockToSpawn, metalToSpawn;
     public int rockHealth;
     public Transform[] spawnLocations;
     public ParticleSystem bonk;
@@ -22,7 +22,20 @@ public class s_Rock : MonoBehaviour {
         {
             foreach(Transform spawn in spawnLocations)
             {
-                Instantiate(rockToSpawn, spawn.transform.position, Quaternion.identity);
+                int rnd = Random.Range(1, 11);
+                // if we randomed 9 or lower, then spawn a rock
+                if (rnd <= 9)
+                {
+                    Instantiate(rockToSpawn, spawn.transform.position, Quaternion.identity);
+                }
+                // if we randomed a 10, then we spawn 3 sets of metal
+                else
+                {
+                    Instantiate(metalToSpawn, spawn.transform.position, Quaternion.identity);
+                    Instantiate(metalToSpawn, spawn.transform.position, Quaternion.identity);
+                    Instantiate(metalToSpawn, spawn.transform.position, Quaternion.identity);
+                }
+
             }
             Destroy(gameObject);
         }

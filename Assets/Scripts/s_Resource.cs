@@ -18,8 +18,14 @@ public class s_Resource : MonoBehaviour {
     public float stonePower;
     public bool isGem;
     public float gemPower;
+    public bool isGold;
+    public float goldPower;
     public bool isFood;
     public float foodPower;
+    public bool isLeather;
+    public float leatherPower;
+    public bool isMetal;
+    public float metalPower;
     public float resourceHealth;
     public bool isOnFire;
     float fireResistance = 3;

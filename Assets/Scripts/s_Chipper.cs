@@ -4,7 +4,7 @@ using System.Collections;
 public class s_Chipper : MonoBehaviour {
 
     public GameObject spawnLocation;
-    public GameObject wood, stone, gem;
+    public GameObject wood, stone, gem, gold;
     string spawnString;
     float spawnTimer;
     public float spawnTimerLimit;
@@ -27,7 +27,7 @@ public class s_Chipper : MonoBehaviour {
     {
         //Debug.Log(spawnString);
 
-        // what we spawn is numbered, so wood = 1, stone = 2, A Small Stone = 3, 
+        // what we spawn is numbered, so wood = 1, stone = 2, A Small Stone = 3, we need to specify small stones, so we can't get random objects from a single small stone
 
         // if we have something in the spawn string
         if (spawnString.Length > 1)
@@ -43,7 +43,7 @@ public class s_Chipper : MonoBehaviour {
                 if (spawnString[1] == '2')
                 {
                     // spawn stone, but first, random between 1-10, 10% chance to spawn a gem
-                    int rand = Random.Range(1, 11);
+                    int rand = Random.Range(1, 12);
                     // assign this to stone, but will change it later. Compiler doesn't like this being unnassigned
                     GameObject objectToSpawn = stone;
                     // if random is 9 and under, spawn a stone
@@ -55,6 +55,11 @@ public class s_Chipper : MonoBehaviour {
                     if (rand == 10)
                     {
                         objectToSpawn = gem;
+                    }
+                    // if we randomed 11, spawn gold
+                    if (rand == 11)
+                    {
+                        objectToSpawn = gold;
                     }
                     GameObject temp = Instantiate(objectToSpawn, spawnLocation.transform.position, spawnLocation.transform.rotation) as GameObject;
                     temp.GetComponent<Rigidbody>().AddForce(spawnLocation.transform.up * 500);
