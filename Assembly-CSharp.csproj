@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\s_Resource.cs" />
      <Compile Include="Assets\Scripts\s_Rock.cs" />
      <Compile Include="Assets\Scripts\s_WanderingAI.cs" />
+     <Compile Include="Assets\Scripts\s_Wisp.cs" />
      <Compile Include="Assets\Scripts\s_Worker.cs" />
      <Compile Include="Assets\Scripts\s_Yeti.cs" />
      <Compile Include="Assets\Scripts\s_cursorLock.cs" />
