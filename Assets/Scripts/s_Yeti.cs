@@ -4,7 +4,7 @@ using System.Collections;
 public class s_Yeti : MonoBehaviour {
 
     public GameObject deadYeti;
-
+    public int health;
 
     // Use this for initialization
     void Start()
@@ -15,7 +15,12 @@ public class s_Yeti : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        // is our yeti dead?
+        if (health <= 0)
+        {
+            //kill that foool, son.
+            KillTheYeti();
+        }
     }
 
     void OnCollisionEnter(Collision other)
@@ -26,14 +31,22 @@ public class s_Yeti : MonoBehaviour {
             if (other.relativeVelocity.magnitude > 3)
             {
                 Debug.Log("hit with a weapon");
-                KillTheYeti();
+                health--;
             }
+        }
+        // if we get hit by a wisp projectile
+        else if (other.gameObject.tag == "Wisp Projectile")
+        {
+            Debug.Log("YAY WISP HIT US! WEEE MILA IS A SEXY MAN");
+            s_WispProjectile tempScript = other.gameObject.GetComponent<s_WispProjectile>();
+            health -= tempScript.damage;
+            Debug.Log("This Yeti has " + health.ToString() + " health left.");
         }
         // but if we aren't a weapon, then it can die to anything as long as it hits it hard enough
         else if (other.relativeVelocity.magnitude > 6)
         {
             Debug.Log("hit hard enough");
-            KillTheYeti();
+            health--;
         }
     }
 
