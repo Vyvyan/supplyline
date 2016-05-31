@@ -54,9 +54,11 @@
      <Compile Include="Assets\Scripts\s_AutoDestroy.cs" />
      <Compile Include="Assets\Scripts\s_CheapPlayerLight.cs" />
      <Compile Include="Assets\Scripts\s_Chipper.cs" />
+     <Compile Include="Assets\Scripts\s_ConstraintsEnabler.cs" />
      <Compile Include="Assets\Scripts\s_Conveyor.cs" />
      <Compile Include="Assets\Scripts\s_ConveyorBelt.cs" />
      <Compile Include="Assets\Scripts\s_FirePlace.cs" />
+     <Compile Include="Assets\Scripts\s_FunnelLineRenderer.cs" />
      <Compile Include="Assets\Scripts\s_GameManager.cs" />
      <Compile Include="Assets\Scripts\s_HUD.cs" />
      <Compile Include="Assets\Scripts\s_HomeBase.cs" />
@@ -66,6 +68,7 @@
      <Compile Include="Assets\Scripts\s_Mover.cs" />
      <Compile Include="Assets\Scripts\s_Resource.cs" />
      <Compile Include="Assets\Scripts\s_Rock.cs" />
+     <Compile Include="Assets\Scripts\s_StretchToPoint.cs" />
      <Compile Include="Assets\Scripts\s_WanderingAI.cs" />
      <Compile Include="Assets\Scripts\s_Wisp.cs" />
      <Compile Include="Assets\Scripts\s_WispProjectile.cs" />

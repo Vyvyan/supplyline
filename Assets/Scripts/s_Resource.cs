@@ -6,8 +6,6 @@ public class s_Resource : MonoBehaviour {
 	Rigidbody rb;
 	public bool isAConveyorPack;
 	public int NumberOfConveyorsLeftInPack;
-	public enum ConveyorType{small, medium, large, xlarge, corner};
-	public ConveyorType conveyorType;
     public bool isGrabable;
     public bool isWood;
     public bool isTool;
@@ -179,6 +177,25 @@ public class s_Resource : MonoBehaviour {
                 // light us on fire
                 isOnFire = true;
             }
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Beam")
+        {
+            rb.velocity = Vector3.zero;
+            // moves towards the end point
+            rb.AddForce(other.transform.forward * (rb.mass * 1.8f), ForceMode.Impulse);
+            rb.useGravity = false;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Beam")
+        {
+            rb.useGravity = true;
         }
     }
 
