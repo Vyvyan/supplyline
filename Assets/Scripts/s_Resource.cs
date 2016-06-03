@@ -28,6 +28,7 @@ public class s_Resource : MonoBehaviour {
     public bool isOnFire;
     float fireResistance = 3;
     public bool fireProof;
+    public bool immuneToTransportBeam;
 
     // non public variables for fire
     GameObject ourFireParticles, ourSmokeParticles;
@@ -182,20 +183,26 @@ public class s_Resource : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Beam")
+        if (!immuneToTransportBeam)
         {
-            rb.velocity = Vector3.zero;
-            // moves towards the end point
-            rb.AddForce(other.transform.forward * (rb.mass * 1.8f), ForceMode.Impulse);
-            rb.useGravity = false;
+            if (other.tag == "Beam")
+            {
+                rb.velocity = Vector3.zero;
+                // moves towards the end point
+                rb.AddForce(other.transform.forward * (rb.mass * 1.8f), ForceMode.Impulse);
+                rb.useGravity = false;
+            }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Beam")
+        if (!immuneToTransportBeam)
         {
-            rb.useGravity = true;
+            if (other.tag == "Beam")
+            {
+                rb.useGravity = true;
+            }
         }
     }
 

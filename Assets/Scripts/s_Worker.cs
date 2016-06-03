@@ -17,7 +17,7 @@ public class s_Worker : MonoBehaviour {
     public float maxPlayerWarmth;
 
 
-    public enum PlayerState { playing, building };
+    public enum PlayerState { playing, building, connectingTowers };
     public PlayerState playerState;
     public GameObject conveyorBeltObject;
 
@@ -31,6 +31,9 @@ public class s_Worker : MonoBehaviour {
     // more dumb stuff
     GameObject tempConveyor;
     s_Conveyor tempConvScript;
+
+    // variables for connecting transport poles
+    s_StretchToPoint startingPole;
 
     // Use this for initialization
     void Start()
@@ -127,10 +130,50 @@ public class s_Worker : MonoBehaviour {
                                 }
                             }
                         }
+
+                        // if we are trying to connect a tower
+                        if (Input.GetKeyDown(KeyCode.E))
+                        {
+                            if (hit.transform.gameObject.tag == "TransportPole")
+                            {
+                                // get the transportPole script
+                                startingPole = hit.transform.gameObject.GetComponent<s_StretchToPoint>();
+
+                                playerState = PlayerState.connectingTowers;
+                            }
+                        }
                     }
                 }
             }
         }
+
+        // IF WE ARE CONNECTING TOWERS
+        if (playerState == PlayerState.connectingTowers)
+        {
+            if (Physics.Raycast(ray, out hit, 6f))
+            {
+                // if we raycast a transport pole that IS NOT the pole we started connection mode with (we can't connect to the same pole)
+                if (hit.collider.tag == "TransportPole" && hit.collider.gameObject != startingPole.gameObject)
+                {
+                    // if we press E
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        // then connect the two towers
+                        startingPole.EndPoint = hit.collider.gameObject.transform.GetChild(0);
+
+                        // now go back to playing
+                        playerState = PlayerState.playing;
+                    }
+                }
+            }
+
+            // cancelling connecting towers
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                playerState = PlayerState.playing;
+            }
+         }
+
 
         // IF WE ARE BUILDING
         if (playerState == PlayerState.building)

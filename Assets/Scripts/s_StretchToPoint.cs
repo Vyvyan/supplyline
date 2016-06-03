@@ -11,7 +11,7 @@ public class s_StretchToPoint : MonoBehaviour {
 	void Start ()
     {
         // might as well reference it now, so we don't do it every frame below
-        trans = gameObject.transform;
+        trans = gameObject.transform.GetChild(0);
 	}
 	
 	// Update is called once per frame
