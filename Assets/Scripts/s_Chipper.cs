@@ -4,7 +4,7 @@ using System.Collections;
 public class s_Chipper : MonoBehaviour {
 
     public GameObject spawnLocation;
-    public GameObject wood, stone, gem, gold;
+    public GameObject wood, stone, gem, gold, food;
     string spawnString;
     float spawnTimer;
     public float spawnTimerLimit;
@@ -70,6 +70,12 @@ public class s_Chipper : MonoBehaviour {
                     GameObject temp = Instantiate(stone, spawnLocation.transform.position, spawnLocation.transform.rotation) as GameObject;
                     temp.GetComponent<Rigidbody>().AddForce(spawnLocation.transform.up * 500);
                 }
+                if (spawnString[1] == '4')
+                {
+                    // spawn food
+                    GameObject temp = Instantiate(food, spawnLocation.transform.position, spawnLocation.transform.rotation) as GameObject;
+                    temp.GetComponent<Rigidbody>().AddForce(spawnLocation.transform.up * 500);
+                }
 
 
 
@@ -122,6 +128,15 @@ public class s_Chipper : MonoBehaviour {
                         otherScript.stonePower -= 5;
                         spawnString += '2';
                     }
+                }
+            }
+            if (otherScript.isFood)
+            {
+                while (otherScript.foodPower > 0)
+                {
+                    // minus 5, add 1 to the spawn string
+                    otherScript.foodPower -= 5;
+                    spawnString += '4';
                 }
             }
 
