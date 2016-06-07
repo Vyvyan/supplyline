@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\s_ConstraintsEnabler.cs" />
      <Compile Include="Assets\Scripts\s_Conveyor.cs" />
      <Compile Include="Assets\Scripts\s_ConveyorBelt.cs" />
+     <Compile Include="Assets\Scripts\s_CrateParts.cs" />
      <Compile Include="Assets\Scripts\s_FirePlace.cs" />
      <Compile Include="Assets\Scripts\s_FunnelLineRenderer.cs" />
      <Compile Include="Assets\Scripts\s_GameManager.cs" />
