@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\S_WeaponChain.cs" />
      <Compile Include="Assets\Scripts\s_Animal.cs" />
      <Compile Include="Assets\Scripts\s_AutoDestroy.cs" />
+     <Compile Include="Assets\Scripts\s_BuyMenu.cs" />
      <Compile Include="Assets\Scripts\s_CheapPlayerLight.cs" />
      <Compile Include="Assets\Scripts\s_Chipper.cs" />
      <Compile Include="Assets\Scripts\s_ConstraintsEnabler.cs" />
@@ -106,6 +107,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
+     <None Include="Assets\Scripts\Custom Shaders\3DTextOneSided.shader" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
      <None Include="Assets\PrimitivePlus\Documentation\ReadMe.txt" />
