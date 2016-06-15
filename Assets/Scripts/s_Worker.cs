@@ -85,6 +85,16 @@ public class s_Worker : MonoBehaviour {
                     }
                 }
 
+                // if we aim at a store button
+                if (hit.transform.gameObject.tag == "StoreButton")
+                {
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        // send the name of the button we clicked to the store script 
+                        hit.collider.gameObject.GetComponentInParent<s_BuyMenu>().ClickButton(hit.collider.gameObject.name.ToString());
+                    }
+                }
+
                 // does the object we are looking at have a resource script?
                 if (hit.transform.gameObject.GetComponent<s_Resource>() != null)
                 {
