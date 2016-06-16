@@ -52,6 +52,8 @@
      <Compile Include="Assets\Scripts\S_WeaponChain.cs" />
      <Compile Include="Assets\Scripts\s_Animal.cs" />
      <Compile Include="Assets\Scripts\s_AutoDestroy.cs" />
+     <Compile Include="Assets\Scripts\s_BeaconLight.cs" />
+     <Compile Include="Assets\Scripts\s_Bloop.cs" />
      <Compile Include="Assets\Scripts\s_BuyMenu.cs" />
      <Compile Include="Assets\Scripts\s_CheapPlayerLight.cs" />
      <Compile Include="Assets\Scripts\s_Chipper.cs" />

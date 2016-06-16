@@ -6,7 +6,7 @@ public class s_BuyMenu : MonoBehaviour {
     public enum MenuState {start, defense, resourceGather, misc};
     public MenuState menuState;
 
-    public GameObject axeCrate;
+    public GameObject beacon;
 
     bool canChangeDisplay;
 
@@ -17,11 +17,13 @@ public class s_BuyMenu : MonoBehaviour {
     {
         menuState = MenuState.start;
         canChangeDisplay = true;
+        beacon = GameObject.FindGameObjectWithTag("Beacon Target");
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
+        beacon.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 15, gameObject.transform.position.z);
 	    if (menuState == MenuState.start)
         {
             if (canChangeDisplay)
