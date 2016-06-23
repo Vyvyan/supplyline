@@ -8,6 +8,8 @@ public class s_BuyMenu : MonoBehaviour {
 
     public GameObject beacon;
 
+    public string shipmentQueue; 
+
     bool canChangeDisplay;
 
     public GameObject startGroup, defenseGroup, resourceGatherGroup, miscGroup;
@@ -94,9 +96,15 @@ public class s_BuyMenu : MonoBehaviour {
 
         if (buttonName == "Butt_Axe")
         {
-            // PUT CODE TO BRING AN AXE TO YOU HERE, MAYBE ADD A NUMBER TO A QUEUE OF A GLOBAL VARIABLE? USE THAT TO THEN HAVE BLOOP CARRY THEM TO YOU?
+            shipmentQueue += 1;
             menuState = MenuState.start;
             canChangeDisplay = true;
         }
     }
+
+    /*
+    Here is the legend for the crates, which numbers they relate to:
+    1: axe crate
+
+    */
 }

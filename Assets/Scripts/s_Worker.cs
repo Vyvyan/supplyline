@@ -21,7 +21,6 @@ public class s_Worker : MonoBehaviour {
     public PlayerState playerState;
     public GameObject conveyorBeltObject;
 
-
     //flags
     bool hasGottenOurBuildingReferenceObject;
 
@@ -92,6 +91,16 @@ public class s_Worker : MonoBehaviour {
                     {
                         // send the name of the button we clicked to the store script 
                         GameObject.FindGameObjectWithTag("BuyScreen").GetComponent<s_BuyMenu>().ClickButton(hit.collider.gameObject.name.ToString());
+                    }
+                }
+
+                // if we aim at the store button lever
+                else if (hit.collider.tag == "Lever")
+                {
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        // send the name of the button we clicked to the store script 
+                        Debug.Log("farts");      
                     }
                 }
 
