@@ -12,6 +12,9 @@ public class s_Worker : MonoBehaviour {
     public float objectMoveToHoldPositionSpeed;
     public SpringJoint holdJoint;
 
+    // a static reference to the object we are holding for easy access in other scripts
+    static public GameObject ObjectWeAreHolding;
+
     public float playerWarmth;
     bool isInHeatVolume;
     public float maxPlayerWarmth;
@@ -94,16 +97,6 @@ public class s_Worker : MonoBehaviour {
                     }
                 }
 
-                // if we aim at the store button lever
-                else if (hit.collider.tag == "Lever")
-                {
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
-                    {
-                        // send the name of the button we clicked to the store script 
-                        Debug.Log("farts");      
-                    }
-                }
-
                 // does the object we are looking at have a resource script?
                 else if (hit.transform.gameObject.GetComponent<s_Resource>() != null)
                 {
@@ -117,6 +110,7 @@ public class s_Worker : MonoBehaviour {
                             {
                                 heldItem = hit.transform.gameObject;
                                 heldItemRB = heldItem.GetComponent<Rigidbody>();
+                                ObjectWeAreHolding = heldItem;
                                 //heldItemRB.isKinematic = true;
 
                                 // CREATE A NEW SPRING WHENEVER WE PICK UP AN OBJECT
@@ -236,6 +230,8 @@ public class s_Worker : MonoBehaviour {
                 // destroy the spring
                 Destroy(holdJoint);
                 heldItem = null;
+                // again, the variable below is just a static variable for easy access in other scripts
+                ObjectWeAreHolding = null;
             }
         }
 

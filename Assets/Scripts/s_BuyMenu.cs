@@ -8,7 +8,9 @@ public class s_BuyMenu : MonoBehaviour {
 
     public GameObject beacon;
 
-    public string shipmentQueue; 
+    public string shipmentQueue;
+
+    Rigidbody rb;
 
     bool canChangeDisplay;
 
@@ -18,6 +20,7 @@ public class s_BuyMenu : MonoBehaviour {
 	void Start ()
     {
         menuState = MenuState.start;
+        rb = gameObject.GetComponentInParent<Rigidbody>();
         canChangeDisplay = true;
         beacon = GameObject.FindGameObjectWithTag("Beacon Target");
 	}
@@ -64,6 +67,25 @@ public class s_BuyMenu : MonoBehaviour {
                 defenseGroup.active = false;
                 resourceGatherGroup.active = false;
                 miscGroup.active = true;
+            }
+        }
+
+        // if we are holding the lever, we need to freeze the rest of the buy menu, so we can actually pull the lever
+        if (s_Worker.ObjectWeAreHolding)
+        {
+            if (s_Worker.ObjectWeAreHolding.tag == "FreezeBuyScreenWhenHeld")
+            {
+                if (!rb.isKinematic)
+                {
+                    rb.isKinematic = true;
+                }
+            }
+        }
+        if (s_Worker.ObjectWeAreHolding == null)
+        {
+            if (rb.isKinematic)
+            {
+                rb.isKinematic = false;
             }
         }
     }
