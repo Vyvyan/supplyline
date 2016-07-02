@@ -10,6 +10,11 @@ public class s_BuyMenu : MonoBehaviour {
 
     public string shipmentQueue;
 
+    // our collection of power bar indicators
+    public GameObject[] powerBars;
+
+    s_StretchToPoint stretchScript;
+
     Rigidbody rb;
 
     bool canChangeDisplay;
@@ -23,7 +28,11 @@ public class s_BuyMenu : MonoBehaviour {
         rb = gameObject.GetComponentInParent<Rigidbody>();
         canChangeDisplay = true;
         beacon = GameObject.FindGameObjectWithTag("Beacon Target");
-	}
+        stretchScript = gameObject.GetComponent<s_StretchToPoint>();
+
+        // start off with lowest power
+        DisplayPowerBars(0);
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -90,7 +99,7 @@ public class s_BuyMenu : MonoBehaviour {
         }
     }
 
-    public void ClickButton(string buttonName)
+    public void ClickButton(string buttonName, GameObject clickedGameObject)
     {
         if (buttonName == "Butt_Back")
         {
@@ -98,35 +107,100 @@ public class s_BuyMenu : MonoBehaviour {
             canChangeDisplay = true;
         }
 
-        if (buttonName == "Butt_Resource")
+        else if (buttonName == "Butt_Resource")
         {
             menuState = MenuState.resourceGather;
             canChangeDisplay = true;
         }
 
-        if (buttonName == "Butt_Misc")
+        else if (buttonName == "Butt_Misc")
         {
             menuState = MenuState.misc;
             canChangeDisplay = true;
         }
 
-        if (buttonName == "Butt_Defense")
+        else if (buttonName == "Butt_Defense")
         {
             menuState = MenuState.defense;
             canChangeDisplay = true;
         }
 
-        if (buttonName == "Butt_Axe")
+        else if (buttonName == "Butt_Axe")
         {
             shipmentQueue += 1;
             menuState = MenuState.start;
             canChangeDisplay = true;
         }
+
+
+
+        // for the power meter on the side of the menu, we use one lower than our actual power on the button because ARRAYS ARE DUMB
+        else if (buttonName == "1")
+        {
+            DisplayPowerBars(0);
+        }
+
+        else if (buttonName == "2")
+        {
+            DisplayPowerBars(1);
+        }
+
+        else if (buttonName == "3")
+        {
+            DisplayPowerBars(2);
+        }
+
+        else if (buttonName == "4")
+        {
+            DisplayPowerBars(3);
+        }
+
+        else if (buttonName == "5")
+        {
+            DisplayPowerBars(4);
+        }
+
+        else if (buttonName == "6")
+        {
+            DisplayPowerBars(5);
+        }
+
+        else if (buttonName == "7")
+        {
+            DisplayPowerBars(6);
+        }
+
+        else if (buttonName == "8")
+        {
+            DisplayPowerBars(7);
+        }
+
+        else if (buttonName == "9")
+        {
+            DisplayPowerBars(8);
+        }
+
+        else if (buttonName == "10")
+        {
+            DisplayPowerBars(9);
+        }
     }
 
-    /*
-    Here is the legend for the crates, which numbers they relate to:
-    1: axe crate
+    void DisplayPowerBars(int buttonNumber)
+    {
+        int i = buttonNumber;
 
-    */
+        // make all of the power bars invisible
+        foreach (GameObject ob in powerBars)
+        {
+            ob.SetActive(false);
+        }
+
+        // we count down using this int 
+        while (i >= 0)
+        {
+            powerBars[i].SetActive(true);
+            i--;
+        }
+    }
 }

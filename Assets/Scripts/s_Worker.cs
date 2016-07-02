@@ -92,8 +92,8 @@ public class s_Worker : MonoBehaviour {
                 {
                     if (Input.GetKeyDown(KeyCode.Mouse0))
                     {
-                        // send the name of the button we clicked to the store script 
-                        GameObject.FindGameObjectWithTag("BuyScreen").GetComponent<s_BuyMenu>().ClickButton(hit.collider.gameObject.name.ToString());
+                        // send the name of the button we clicked to the store script, and the game object
+                        GameObject.FindGameObjectWithTag("BuyScreen").GetComponent<s_BuyMenu>().ClickButton(hit.collider.gameObject.name.ToString(), hit.collider.gameObject);
                     }
                 }
 
