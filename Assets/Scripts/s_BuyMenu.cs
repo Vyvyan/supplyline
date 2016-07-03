@@ -8,7 +8,11 @@ public class s_BuyMenu : MonoBehaviour {
 
     public GameObject beacon;
 
-    public string shipmentQueue;
+    float shippingPower;
+
+    public Transform shippingCatapultLocation;
+
+    public GameObject itemToShip;
 
     // our collection of power bar indicators
     public GameObject[] powerBars;
@@ -29,15 +33,18 @@ public class s_BuyMenu : MonoBehaviour {
         canChangeDisplay = true;
         beacon = GameObject.FindGameObjectWithTag("Beacon Target");
         stretchScript = gameObject.GetComponent<s_StretchToPoint>();
+        // references where the catapult is, basically our location to fire from
+        shippingCatapultLocation = GameObject.FindGameObjectWithTag("ShippingCatapult").transform;
 
         // start off with lowest power
-        DisplayPowerBars(0);
+        //DisplayPowerBars(0);
+        shippingPower = .5f;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        beacon.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 15, gameObject.transform.position.z);
+        beacon.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 30, gameObject.transform.position.z);
 	    if (menuState == MenuState.start)
         {
             if (canChangeDisplay)
@@ -127,27 +134,30 @@ public class s_BuyMenu : MonoBehaviour {
 
         else if (buttonName == "Butt_Axe")
         {
-            shipmentQueue += 1;
+            StartCoroutine(ShipObject(1));
             menuState = MenuState.start;
             canChangeDisplay = true;
         }
 
 
-
+        /* WE MAY NOT NEED THIS CODE FOR THE POWER. SEEMS LIKE IT'S HITTING PRETTY WELL AT DEFAULT POWER
         // for the power meter on the side of the menu, we use one lower than our actual power on the button because ARRAYS ARE DUMB
         else if (buttonName == "1")
         {
             DisplayPowerBars(0);
+            shippingPower = .5f;
         }
 
         else if (buttonName == "2")
         {
             DisplayPowerBars(1);
+            shippingPower = 25;
         }
 
         else if (buttonName == "3")
         {
             DisplayPowerBars(2);
+            shippingPower = 50;
         }
 
         else if (buttonName == "4")
@@ -184,6 +194,7 @@ public class s_BuyMenu : MonoBehaviour {
         {
             DisplayPowerBars(9);
         }
+        */
     }
 
     void DisplayPowerBars(int buttonNumber)
@@ -203,4 +214,34 @@ public class s_BuyMenu : MonoBehaviour {
             i--;
         }
     }
+
+    IEnumerator ShipObject(int itemCode)
+    {
+        // we wait a short time, and then launch the thing
+        yield return new WaitForSeconds(3f);
+
+        // instantiate the standard crate
+        GameObject temp = Instantiate(itemToShip, shippingCatapultLocation.position, Quaternion.identity) as GameObject;
+        // get it's rigid body to launch it
+        Rigidbody rb = temp.GetComponent<Rigidbody>();
+        // get it's crate script so we can tell it what type of crate it is
+        s_Crate tempCrateScript = temp.GetComponent<s_Crate>();
+        // assign the item code to the newly created crate
+        tempCrateScript.itemCode = itemCode;
+
+        Vector3 direction = beacon.transform.position - shippingCatapultLocation.transform.position;
+
+        rb.velocity = new Vector3(direction.x / 2, 45, direction.z / 2) * shippingPower;
+        rb.AddRelativeTorque(new Vector3(Random.Range(0,100), Random.Range(0, 100), Random.Range(0, 100)));
+
+        Debug.Log(shippingPower.ToString());
+    }
+
+    /*
+
+    Item Code Legend:
+    Axe Crate - 1
+
+
+    */
 }

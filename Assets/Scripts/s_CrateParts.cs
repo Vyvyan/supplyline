@@ -6,6 +6,7 @@ public class s_CrateParts : MonoBehaviour {
     FixedJoint joint;
     public GameObject crateSide;
     public GameObject payLoad;
+    bool canBreak;
 
 	// Use this for initialization
 	void Start ()
@@ -16,7 +17,7 @@ public class s_CrateParts : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	    
+        StartCoroutine(InvincibilityFramesWhenSpawned());
 	}
 
     void OnCollisionEnter(Collision other)
@@ -34,14 +35,24 @@ public class s_CrateParts : MonoBehaviour {
         }
         else if (other.relativeVelocity.magnitude >= 30)
         {
-            Instantiate(crateSide, gameObject.transform.position, gameObject.transform.rotation);
-            // if any of the crate sides break, we need to make the payload a physics object
-            if (payLoad)
+            if (canBreak)
             {
-                payLoad.GetComponent<Rigidbody>().isKinematic = false;
-                payLoad.transform.parent = null;
+                Instantiate(crateSide, gameObject.transform.position, gameObject.transform.rotation);
+                // if any of the crate sides break, we need to make the payload a physics object
+                if (payLoad)
+                {
+                    payLoad.GetComponent<Rigidbody>().isKinematic = false;
+                    payLoad.transform.parent = null;
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
+    }
+
+    IEnumerator InvincibilityFramesWhenSpawned()
+    {
+        canBreak = false;
+        yield return new WaitForSeconds(20f);
+        canBreak = true;
     }
 }
