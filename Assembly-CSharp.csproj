@@ -63,6 +63,8 @@
      <Compile Include="Assets\Scripts\s_Crate.cs" />
      <Compile Include="Assets\Scripts\s_CrateParts.cs" />
      <Compile Include="Assets\Scripts\s_FirePlace.cs" />
+     <Compile Include="Assets\Scripts\s_Fish.cs" />
+     <Compile Include="Assets\Scripts\s_FishDrill.cs" />
      <Compile Include="Assets\Scripts\s_FunnelLineRenderer.cs" />
      <Compile Include="Assets\Scripts\s_GameManager.cs" />
      <Compile Include="Assets\Scripts\s_HUD.cs" />
