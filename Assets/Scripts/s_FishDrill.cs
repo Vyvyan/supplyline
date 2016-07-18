@@ -78,7 +78,7 @@ public class s_FishDrill : MonoBehaviour {
 
     void GetNewFishTimer()
     {
-        fishTimer_Max = Random.Range(5f, 90f);
+        fishTimer_Max = Random.Range(5f, 120f);
         fishTimer_Current = fishTimer_Max;
     }
 }
