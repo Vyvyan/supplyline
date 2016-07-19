@@ -29,6 +29,9 @@ public class s_Resource : MonoBehaviour {
     float fireResistance = 3;
     public bool fireProof;
     public bool immuneToTransportBeam;
+    public bool isPerson;
+    public enum PersonType {cook, carpenter, outfitter, blacksmith, mage, miner};
+    public PersonType personType;
 
     // non public variables for fire
     GameObject ourFireParticles, ourSmokeParticles;

@@ -1,18 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class s_HomeBase : MonoBehaviour {
+
+    string[] firstNames, lastNames;
 
 	// Use this for initialization
 	void Start ()
     {
-	    
+        firstNames = File.ReadAllLines("Assets/Names/First Names.txt");
+        lastNames = File.ReadAllLines("Assets/Names/Last Names.txt");
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-	    
+	    if(Input.GetKeyDown(KeyCode.M))
+        {
+            Debug.Log("Your new Citizen is: " + firstNames[Random.Range(0, firstNames.Length + 1)] + " " + lastNames[Random.Range(0, lastNames.Length + 1)]);
+        }
 	}
 
     void OnTriggerEnter(Collider other)
@@ -63,6 +70,14 @@ public class s_HomeBase : MonoBehaviour {
             if (!tempResScript.isTool)
             {
                 Destroy(other.gameObject);
+            }
+
+            if (tempResScript.isPerson)
+            {
+                if (tempResScript.personType == s_Resource.PersonType.blacksmith)
+                {
+                    // stuff
+                }
             }
 
             Debug.Log("Wood = " + s_GameManager.townWood.ToString() + ", Stone = " + s_GameManager.townStone.ToString() + ", Gems = " + s_GameManager.townGems.ToString()
