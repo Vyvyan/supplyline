@@ -4,10 +4,14 @@ using System.IO;
 
 public class s_HomeBase : MonoBehaviour {
 
+    // FOR REFERENCE, Our Class Types are: cook, carpenter, outfitter, blacksmith, mage, miner
+
     string[] firstNames, lastNames;
 
-	// Use this for initialization
-	void Start ()
+    public static int townWood, townStone, townGems, townGold, townFood, townMetal, townLeather;
+
+    // Use this for initialization
+    void Start ()
     {
         firstNames = File.ReadAllLines("Assets/Names/First Names.txt");
         lastNames = File.ReadAllLines("Assets/Names/Last Names.txt");
@@ -33,37 +37,37 @@ public class s_HomeBase : MonoBehaviour {
             // if we are wood, add our wood power to the towns
             if(tempResScript.isWood)
             {
-                s_GameManager.townWood += Mathf.RoundToInt(tempResScript.woodPower);
+                townWood += Mathf.RoundToInt(tempResScript.woodPower);
             }
             // if we are stone, add our stone power to the towns
             if (tempResScript.isStone)
             {
-                s_GameManager.townStone += Mathf.RoundToInt(tempResScript.stonePower);
+                townStone += Mathf.RoundToInt(tempResScript.stonePower);
             }
             // if we are gem, add our gem power to the towns
             if (tempResScript.isGem)
             {
-                s_GameManager.townGems += Mathf.RoundToInt(tempResScript.gemPower);
+                townGems += Mathf.RoundToInt(tempResScript.gemPower);
             }
             // if we are gold, add our gold power to the towns
             if (tempResScript.isGold)
             {
-                s_GameManager.townGold += Mathf.RoundToInt(tempResScript.goldPower);
+                townGold += Mathf.RoundToInt(tempResScript.goldPower);
             }
             // if we are food, add our food power to the towns
             if (tempResScript.isFood)
             {
-                s_GameManager.townFood += Mathf.RoundToInt(tempResScript.foodPower);
+                townFood += Mathf.RoundToInt(tempResScript.foodPower);
             }
             // if we are metal, add our metal power to the towns
             if (tempResScript.isMetal)
             {
-                s_GameManager.townMetal += Mathf.RoundToInt(tempResScript.metalPower);
+                townMetal += Mathf.RoundToInt(tempResScript.metalPower);
             }
             // if we are leather, add our leather power to the towns
             if (tempResScript.isLeather)
             {
-                s_GameManager.townLeather += Mathf.RoundToInt(tempResScript.leatherPower);
+                townLeather += Mathf.RoundToInt(tempResScript.leatherPower);
             }
 
             // destroy the object we are returning, unless it can't be destroyed at town
@@ -80,9 +84,9 @@ public class s_HomeBase : MonoBehaviour {
                 }
             }
 
-            Debug.Log("Wood = " + s_GameManager.townWood.ToString() + ", Stone = " + s_GameManager.townStone.ToString() + ", Gems = " + s_GameManager.townGems.ToString()
-                + ", Gold = " + s_GameManager.townGold.ToString() + ", Food = " + s_GameManager.townFood.ToString() + ", Metal = " + s_GameManager.townMetal.ToString() + 
-                ", Leather = " + s_GameManager.townLeather.ToString());
+            Debug.Log("Wood = " + townWood.ToString() + ", Stone = " + townStone.ToString() + ", Gems = " + townGems.ToString()
+                + ", Gold = " + townGold.ToString() + ", Food = " + townFood.ToString() + ", Metal = " + townMetal.ToString() + 
+                ", Leather = " + townLeather.ToString());
 
         }
     }
