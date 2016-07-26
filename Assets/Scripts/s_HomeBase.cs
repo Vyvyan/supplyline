@@ -6,15 +6,21 @@ public class s_HomeBase : MonoBehaviour {
 
     // FOR REFERENCE, Our Class Types are: cook, carpenter, outfitter, blacksmith, mage, miner
 
-    string[] firstNames, lastNames;
+    string[] firstNames, lastNames, likesAndDislikes;
 
     public static int townWood, townStone, townGems, townGold, townFood, townMetal, townLeather;
+    public static int cooks, carpenters, outfitters, blacksmiths, mages, miners;
+
+    public GameObject citizenFlyer, flyerSpawnLocation;
 
     // Use this for initialization
     void Start ()
     {
-        firstNames = File.ReadAllLines("Assets/Names/First Names.txt");
-        lastNames = File.ReadAllLines("Assets/Names/Last Names.txt");
+        firstNames = File.ReadAllLines("Assets/Text Files/First Names.txt");
+        lastNames = File.ReadAllLines("Assets/Text Files/Last Names.txt");
+        likesAndDislikes = File.ReadAllLines("Assets/Text Files/Likes and Dislikes.txt");
+
+        Debug.Log(likesAndDislikes.Length);
 	}
 	
 	// Update is called once per frame
@@ -22,7 +28,8 @@ public class s_HomeBase : MonoBehaviour {
     {
 	    if(Input.GetKeyDown(KeyCode.M))
         {
-            Debug.Log("Your new Citizen is: " + firstNames[Random.Range(0, firstNames.Length + 1)] + " " + lastNames[Random.Range(0, lastNames.Length + 1)]);
+            GetRandomName();
+            GetPersonalityTraits();
         }
 	}
 
@@ -80,8 +87,36 @@ public class s_HomeBase : MonoBehaviour {
             {
                 if (tempResScript.personType == s_Resource.PersonType.blacksmith)
                 {
-                    // stuff
+                    SpawnFlyer("Blacksmith");
+                    blacksmiths++;
                 }
+                if (tempResScript.personType == s_Resource.PersonType.carpenter)
+                {
+                    SpawnFlyer("Carpenter");
+                    carpenters++;
+                }
+                if (tempResScript.personType == s_Resource.PersonType.cook)
+                {
+                    SpawnFlyer("Cook");
+                    cooks++;
+                }
+                if (tempResScript.personType == s_Resource.PersonType.mage)
+                {
+                    SpawnFlyer("Mage");
+                    mages++;
+                }
+                if (tempResScript.personType == s_Resource.PersonType.miner)
+                {
+                    SpawnFlyer("Miner");
+                    miners++;
+                }
+                if (tempResScript.personType == s_Resource.PersonType.outfitter)
+                {
+                    SpawnFlyer("Outfitter");
+                    outfitters++;
+                }
+
+                Destroy(other.gameObject);
             }
 
             Debug.Log("Wood = " + townWood.ToString() + ", Stone = " + townStone.ToString() + ", Gems = " + townGems.ToString()
@@ -89,5 +124,32 @@ public class s_HomeBase : MonoBehaviour {
                 ", Leather = " + townLeather.ToString());
 
         }
+    }
+
+    public string GetRandomName()
+    {
+        string first = firstNames[Random.Range(0, firstNames.Length)];
+        string last = lastNames[Random.Range(0, lastNames.Length)];
+        Debug.Log(first + " " + last);
+        return first + " " + last;
+    }
+
+    public string GetPersonalityTraits()
+    {
+        string trait = likesAndDislikes[Random.Range(0, likesAndDislikes.Length)];
+        Debug.Log(trait);
+        return trait;
+    }
+
+    public void SpawnFlyer(string jobTitle)
+    {
+        GameObject flyer = Instantiate(citizenFlyer, flyerSpawnLocation.transform.position, Quaternion.identity) as GameObject;
+        s_Flyer flyerScript = flyer.GetComponent<s_Flyer>();
+
+        flyerScript.name_string = GetRandomName();
+        flyerScript.job_string = jobTitle;
+        flyerScript.likes1_string = GetPersonalityTraits();
+        flyerScript.likes2_string = GetPersonalityTraits();
+        flyerScript.dislikes_string = GetPersonalityTraits();
     }
 }

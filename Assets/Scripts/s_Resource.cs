@@ -72,6 +72,18 @@ public class s_Resource : MonoBehaviour {
         {
             resourceHealth = 1;
         }
+
+        // randomize job
+        if (isPerson)
+        {
+            int rnd = Random.Range(1, 7);
+            if (rnd == 1) { personType = PersonType.blacksmith; }
+            if (rnd == 2) { personType = PersonType.carpenter; }
+            if (rnd == 3) { personType = PersonType.cook; }
+            if (rnd == 4) { personType = PersonType.mage; }
+            if (rnd == 5) { personType = PersonType.miner; }
+            if (rnd == 6) { personType = PersonType.outfitter; }
+        }
 	}
 	
 	// Update is called once per frame
