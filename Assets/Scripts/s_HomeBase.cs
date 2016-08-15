@@ -13,15 +13,19 @@ public class s_HomeBase : MonoBehaviour {
 
     public GameObject citizenFlyer, flyerSpawnLocation;
 
+    public s_TownBoard townBoardScript;
+    int townCapacity;
+    int townPopulation = 0;
+
     // Use this for initialization
     void Start ()
     {
         firstNames = File.ReadAllLines("Assets/Text Files/First Names.txt");
         lastNames = File.ReadAllLines("Assets/Text Files/Last Names.txt");
         likesAndDislikes = File.ReadAllLines("Assets/Text Files/Likes and Dislikes.txt");
-
-        Debug.Log(likesAndDislikes.Length);
-	}
+        // determines the town capacity based on how many flyer spawns there are in the relative town board
+        townCapacity = townBoardScript.flyerSpawns.Length;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -85,38 +89,41 @@ public class s_HomeBase : MonoBehaviour {
 
             if (tempResScript.isPerson)
             {
-                if (tempResScript.personType == s_Resource.PersonType.blacksmith)
+                if (townPopulation < townCapacity)
                 {
-                    SpawnFlyer("Blacksmith");
-                    blacksmiths++;
-                }
-                if (tempResScript.personType == s_Resource.PersonType.carpenter)
-                {
-                    SpawnFlyer("Carpenter");
-                    carpenters++;
-                }
-                if (tempResScript.personType == s_Resource.PersonType.cook)
-                {
-                    SpawnFlyer("Cook");
-                    cooks++;
-                }
-                if (tempResScript.personType == s_Resource.PersonType.mage)
-                {
-                    SpawnFlyer("Mage");
-                    mages++;
-                }
-                if (tempResScript.personType == s_Resource.PersonType.miner)
-                {
-                    SpawnFlyer("Miner");
-                    miners++;
-                }
-                if (tempResScript.personType == s_Resource.PersonType.outfitter)
-                {
-                    SpawnFlyer("Outfitter");
-                    outfitters++;
-                }
+                    if (tempResScript.personType == s_Resource.PersonType.blacksmith)
+                    {
+                        SpawnFlyer("Blacksmith");
+                        blacksmiths++;
+                    }
+                    if (tempResScript.personType == s_Resource.PersonType.carpenter)
+                    {
+                        SpawnFlyer("Carpenter");
+                        carpenters++;
+                    }
+                    if (tempResScript.personType == s_Resource.PersonType.cook)
+                    {
+                        SpawnFlyer("Cook");
+                        cooks++;
+                    }
+                    if (tempResScript.personType == s_Resource.PersonType.mage)
+                    {
+                        SpawnFlyer("Mage");
+                        mages++;
+                    }
+                    if (tempResScript.personType == s_Resource.PersonType.miner)
+                    {
+                        SpawnFlyer("Miner");
+                        miners++;
+                    }
+                    if (tempResScript.personType == s_Resource.PersonType.outfitter)
+                    {
+                        SpawnFlyer("Outfitter");
+                        outfitters++;
+                    }
 
-                Destroy(other.gameObject);
+                    Destroy(other.gameObject);
+                }
             }
 
             Debug.Log("Wood = " + townWood.ToString() + ", Stone = " + townStone.ToString() + ", Gems = " + townGems.ToString()
@@ -143,7 +150,9 @@ public class s_HomeBase : MonoBehaviour {
 
     public void SpawnFlyer(string jobTitle)
     {
-        GameObject flyer = Instantiate(citizenFlyer, flyerSpawnLocation.transform.position, Quaternion.identity) as GameObject;
+        GameObject flyer = Instantiate(citizenFlyer, townBoardScript.flyerSpawns[townPopulation].transform.position, Quaternion.identity) as GameObject;
+        // after we spawn the flyer, now we increase the population
+        townPopulation++;
         s_Flyer flyerScript = flyer.GetComponent<s_Flyer>();
 
         flyerScript.name_string = GetRandomName();

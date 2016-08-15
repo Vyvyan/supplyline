@@ -131,6 +131,9 @@ public class s_Resource : MonoBehaviour {
                 heatCollider.isTrigger = true;
                 heatCollider.gameObject.tag = "Warmer";
                 heatCollider.radius = 8;
+
+                // we make it immune to the transport poles while it's burning, since the warmer volume gets picked up in the transport too
+                immuneToTransportBeam = true;
             }
             if (!ourSmokeParticles)
             {

@@ -79,6 +79,7 @@
      <Compile Include="Assets\Scripts\s_ShippingCatapult.cs" />
      <Compile Include="Assets\Scripts\s_StretchToPoint.cs" />
      <Compile Include="Assets\Scripts\s_TestLauncher.cs" />
+     <Compile Include="Assets\Scripts\s_TownBoard.cs" />
      <Compile Include="Assets\Scripts\s_WanderingAI.cs" />
      <Compile Include="Assets\Scripts\s_Wisp.cs" />
      <Compile Include="Assets\Scripts\s_WispProjectile.cs" />
